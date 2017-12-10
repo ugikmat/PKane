@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_profil"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Profil" />
+
+        <item
+            android:id="@+id/nav_menu"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Menu" />
+
+        <item
+            android:id="@+id/nav_chart"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Chart" />
+
+        <item
+            android:id="@+id/nav_order"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Order" />
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Tentang Kami" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Logout" />
+    </group>
+
+</menu>

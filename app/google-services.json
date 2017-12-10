@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "404429489753",
+    "firebase_url": "https://pijatkane.firebaseio.com",
+    "project_id": "pijatkane",
+    "storage_bucket": "pijatkane.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404429489753:android:97f478e5437dd0ec",
+        "android_client_info": {
+          "package_name": "com.example.mat.pkane"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404429489753-1gmdfevjq2aanjnit512pqrepcd42kli.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mat.pkane",
+            "certificate_hash": "dcaf53fc8c46b6ee9c16497a540ff3dc0b24abf9"
+          }
+        },
+        {
+          "client_id": "404429489753-2hinoi0450n3d699lne6qfr43gl03mjc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASzVIoqEJZ7wCNepIk-8OkR3kALdBFXdE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404429489753-2hinoi0450n3d699lne6qfr43gl03mjc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
