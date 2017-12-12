@@ -39,11 +39,8 @@
         <activity android:name=".UserList" />
         <activity android:name=".TherapisList" />
         <activity android:name=".OrderList" />
-        <activity android:name=".TambahPijat" />
-        <activity android:name=".EditPijat" />
         <activity android:name=".EditProfil" />
         <activity android:name=".ChangePassword" />
-        <activity android:name=".TambahTherapist"></activity>
     </application>
 
 </manifest>

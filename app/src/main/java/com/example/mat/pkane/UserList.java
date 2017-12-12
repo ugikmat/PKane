@@ -1,26 +1,16 @@
 package com.example.mat.pkane;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mat.pkane.Common.Requests;
-import com.example.mat.pkane.Database.Database;
 import com.example.mat.pkane.Model.Order;
-import com.example.mat.pkane.Model.Request;
 import com.example.mat.pkane.Model.User;
-import com.example.mat.pkane.ViewHolder.CardAdapter;
-import com.example.mat.pkane.ViewHolder.OrderViewHolder;
 import com.example.mat.pkane.ViewHolder.UserViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -37,11 +27,8 @@ public class UserList extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference userList;
 
-    TextView txt_total;
-    Button btnPesan;
     Bundle extra;
     Boolean admin;
-    FloatingActionButton fabAdd;
 
     List<Order> user = new ArrayList<>();
 
@@ -59,17 +46,6 @@ public class UserList extends AppCompatActivity {
         extra = getIntent().getExtras();
         admin = extra.getBoolean("Admin");
 
-        fabAdd = findViewById(R.id.fab_add);
-
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserList.this,SignUpActivity.class);
-                intent.putExtra("Admin",admin);
-                startActivity(intent);
-
-            }
-        });
 
         recyclerView = (RecyclerView) findViewById(R.id.user_list);
         recyclerView.hasFixedSize();
@@ -101,9 +77,7 @@ public class UserList extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
-        if(item.getTitle().equals("Update")){
-            toUpdate(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
-        }else if(item.getTitle().equals("Delete")){
+        if (item.getTitle().equals("Delete")) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserList.this);
             alertDialog.setTitle("Konfirmasi");
             alertDialog.setMessage("Apakah anda ingin menghapus ? ");
@@ -129,15 +103,5 @@ public class UserList extends AppCompatActivity {
 
         return super.onContextItemSelected(item);
 
-    }
-
-    private void toUpdate(String key, User item) {
-        Intent intent = new Intent(UserList.this,EditProfil.class);
-        intent.putExtra("username",key);
-        intent.putExtra("name",item.getNama());
-        intent.putExtra("email",item.getEmail());
-        intent.putExtra("phone",item.getPhone());
-        intent.putExtra("pass",item.getPassword());
-        startActivity(intent);
     }
 }

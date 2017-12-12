@@ -3,9 +3,9 @@ package com.example.mat.pkane;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,8 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -26,8 +24,6 @@ import com.example.mat.pkane.Model.Request;
 import com.example.mat.pkane.ViewHolder.CardAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -190,7 +186,7 @@ public class CartActivity extends AppCompatActivity {
         for(Order order:cart){
             total+=(Integer.parseInt(order.getPrice()))-((Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getDiscount())));
         }
-        Locale locale = new Locale("en","US");
+        Locale locale = new Locale("in", "ID");
         NumberFormat fmt= NumberFormat.getCurrencyInstance(locale);
 
         txt_total.setText(fmt.format(total));

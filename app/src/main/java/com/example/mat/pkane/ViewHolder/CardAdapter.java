@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.mat.pkane.Common.Common;
 import com.example.mat.pkane.Interface.ItemClickListener;
 import com.example.mat.pkane.Model.Order;
 import com.example.mat.pkane.R;
@@ -22,20 +24,19 @@ import java.util.Locale;
 
 class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener{
 
-    public TextView txt_cart_name,txt_price;
+    protected TextView txt_cart_name, txt_price;
 
 
     private ItemClickListener itemClickListener;
 
-    public void setTxt_cart_name(TextView txt_cart_name) {
-        this.txt_cart_name = txt_cart_name;
-    }
-
     public CartViewHolder(View itemView) {
         super(itemView);
-        txt_cart_name = (TextView)itemView.findViewById(R.id.cart_item_name);
-        txt_price = (TextView)itemView.findViewById(R.id.cart_item_price);
-        itemView.setOnCreateContextMenuListener(this);
+        txt_cart_name = itemView.findViewById(R.id.cart_item_name);
+        txt_price = itemView.findViewById(R.id.cart_item_price);
+        if (!Common.currentUser.isAdmin()) {
+            itemView.setOnCreateContextMenuListener(this);
+        }
+
         itemView.setOnClickListener(this);
         itemClickListener = new ItemClickListener() {
             @Override
@@ -45,6 +46,9 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
         };
     }
 
+    public void setTxt_cart_name(TextView txt_cart_name) {
+        this.txt_cart_name = txt_cart_name;
+    }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
@@ -80,10 +84,10 @@ public class CardAdapter extends RecyclerView.Adapter<CartViewHolder> {
 
     @Override
     public void onBindViewHolder(CartViewHolder holder, int position) {
-        Locale locale = new Locale("en","US");
+        Locale locale = new Locale("in", "ID");
         NumberFormat fmt= NumberFormat.getCurrencyInstance(locale);
         int price = (Integer.parseInt(listData.get(position).getPrice())-(Integer.parseInt(listData.get(position).getPrice())*Integer.parseInt(listData.get(position).getDiscount())));
-        holder.txt_price.setText(fmt.format(price));;
+        holder.txt_price.setText(fmt.format(price));
         holder.txt_cart_name.setText(listData.get(position).getProductName());
 
     }

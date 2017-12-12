@@ -1,11 +1,11 @@
 package com.example.mat.pkane.ViewHolder;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.mat.pkane.Common.Common;
 import com.example.mat.pkane.Interface.ItemClickListener;
 import com.example.mat.pkane.R;
 
@@ -27,7 +27,10 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
         textPrice = itemView.findViewById(R.id.order_price);
         textGender = itemView.findViewById(R.id.order_gender);
 
-        itemView.setOnCreateContextMenuListener(this);
+        if (!Common.currentUser.isAdmin()) {
+            itemView.setOnCreateContextMenuListener(this);
+        }
+
         itemView.setOnClickListener(this);
         itemClickListener = new ItemClickListener() {
             @Override
@@ -52,7 +55,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         menu.setHeaderTitle("Select an action");
-        menu.add(0,0,getAdapterPosition(),"Update");
+//        menu.add(0,0,getAdapterPosition(),"Update");
         menu.add(0,1,getAdapterPosition(),"Delete");
     }
 }

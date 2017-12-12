@@ -4,27 +4,26 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.example.mat.pkane.Common.Common;
-import com.example.mat.pkane.Model.Pijat;
 import com.example.mat.pkane.Database.Database;
 import com.example.mat.pkane.Model.Order;
+import com.example.mat.pkane.Model.Pijat;
 import com.example.mat.pkane.ViewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -39,18 +38,11 @@ public class Home extends AppCompatActivity
 
     TextView txtFullName;
 
-    int mExpandedPosition = -1;
+
+    FirebaseRecyclerAdapter<Pijat, MenuViewHolder> adapter;
 
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
-
-    Pijat currentPijat;
-
-    String productId="";
-    String discount="";
-
-    int mYear, mDay, mMonth, mHour, mMinute;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +90,7 @@ public class Home extends AppCompatActivity
 
     private void loadMenu() {
 
-        FirebaseRecyclerAdapter<Pijat, MenuViewHolder> adapter = new FirebaseRecyclerAdapter<Pijat, MenuViewHolder>(Pijat.class, R.layout.menu_item, MenuViewHolder.class, pijat) {
+        adapter = new FirebaseRecyclerAdapter<Pijat, MenuViewHolder>(Pijat.class, R.layout.menu_item, MenuViewHolder.class, pijat) {
             @Override
             protected void populateViewHolder(final MenuViewHolder viewHolder, final Pijat model, final int position) {
 
@@ -117,13 +109,6 @@ public class Home extends AppCompatActivity
                         alertDialog.setTitle("Konfirmasi");
                         alertDialog.setMessage("Apakah anda ingin memesan ");
 
-//                        final EditText edtTry = new EditText(Home.this);
-//                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-//                                LinearLayout.LayoutParams.MATCH_PARENT,
-//                                LinearLayout.LayoutParams.MATCH_PARENT
-//                        );
-//                        edtTry.setLayoutParams(lp);
-//                        alertDialog.setView(edtTry);
                         alertDialog.setIcon(R.drawable.ic_shopping_cart);
 
                         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
@@ -188,8 +173,7 @@ public class Home extends AppCompatActivity
             intent = new Intent(this, Profil.class);
             startActivity(intent);
         }else if (id == R.id.nav_menu) {
-            intent = new Intent(this, Home.class);
-            startActivity(intent);
+            adapter.notifyDataSetChanged();
         }else if (id == R.id.nav_chart) {
             intent = new Intent(Home.this,CartActivity.class);
             startActivity(intent);
@@ -204,7 +188,6 @@ public class Home extends AppCompatActivity
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

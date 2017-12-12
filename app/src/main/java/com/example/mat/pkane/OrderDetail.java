@@ -1,19 +1,16 @@
 package com.example.mat.pkane;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mat.pkane.Common.Requests;
-import com.example.mat.pkane.Database.Database;
 import com.example.mat.pkane.Model.Order;
 import com.example.mat.pkane.Model.Request;
 import com.example.mat.pkane.ViewHolder.CardAdapter;
@@ -87,7 +84,8 @@ public class OrderDetail extends AppCompatActivity {
         for(Order order:cart){
             total+=(Integer.parseInt(order.getPrice()))-((Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getDiscount())));
         }
-        Locale locale = new Locale("en","US");
+
+        Locale locale = new Locale("in", "ID");
         NumberFormat fmt= NumberFormat.getCurrencyInstance(locale);
         txt_total.setText(fmt.format(total));
     }

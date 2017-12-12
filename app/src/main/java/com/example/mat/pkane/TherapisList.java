@@ -2,29 +2,21 @@ package com.example.mat.pkane;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mat.pkane.Model.Order;
 import com.example.mat.pkane.Model.Therapis;
-import com.example.mat.pkane.Model.User;
 import com.example.mat.pkane.ViewHolder.TherapisViewHolder;
-import com.example.mat.pkane.ViewHolder.UserViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TherapisList extends AppCompatActivity {
 
@@ -58,8 +50,6 @@ public class TherapisList extends AppCompatActivity {
         therapisList = database.getReference("Therapis");
 
 
-
-
         recyclerView = (RecyclerView) findViewById(R.id.therapis_list);
         recyclerView.hasFixedSize();
         layoutManager = new LinearLayoutManager(this);
@@ -91,9 +81,10 @@ public class TherapisList extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
-        if(item.getTitle().equals("Update")){
-            toUpdate(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
-        }else if(item.getTitle().equals("Delete")){
+//        if(item.getTitle().equals("Update")){
+//            toUpdate(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
+//        }else
+        if (item.getTitle().equals("Delete")) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(TherapisList.this);
             alertDialog.setTitle("Konfirmasi");
             alertDialog.setMessage("Apakah anda ingin menghapus ? ");
@@ -120,14 +111,14 @@ public class TherapisList extends AppCompatActivity {
 
     }
 
-    private void toUpdate(String key, Therapis item) {
-        Intent intent = new Intent(TherapisList.this,EditProfil.class);
-        intent.putExtra("username",key);
-        intent.putExtra("name",item.getNama());
-        intent.putExtra("email",item.getEmail());
-        intent.putExtra("phone",item.getPhone());
-        intent.putExtra("address",item.getAddress());
-        intent.putExtra("gender",item.getGender());
-        startActivity(intent);
-    }
+//    private void toUpdate(String key, Therapis item) {
+//        Intent intent = new Intent(TherapisList.this,EditProfil.class);
+//        intent.putExtra("username",key);
+//        intent.putExtra("name",item.getNama());
+//        intent.putExtra("email",item.getEmail());
+//        intent.putExtra("phone",item.getPhone());
+//        intent.putExtra("address",item.getAddress());
+//        intent.putExtra("gender",item.getGender());
+//        startActivity(intent);
+//    }
 }

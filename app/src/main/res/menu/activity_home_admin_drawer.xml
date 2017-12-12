@@ -9,17 +9,9 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Home" />
         <item
-            android:id="@+id/nav_profil"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Profil" />
-        <item
             android:id="@+id/nav_user"
             android:icon="@drawable/ic_menu_camera"
             android:title="User List" />
-        <item
-            android:id="@+id/nav_admin"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Admin List" />
         <item
             android:id="@+id/nav_terapist"
             android:icon="@drawable/ic_menu_gallery"
