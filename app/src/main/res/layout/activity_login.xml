@@ -52,14 +52,6 @@
             android:hint="Password"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/logSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/loginForm"
-        android:layout_centerHorizontal="true"
-        android:text="Belum punya akun? Klik disini"/>
-
     <Button
         android:id="@+id/buttonMasuk"
         android:layout_width="match_parent"

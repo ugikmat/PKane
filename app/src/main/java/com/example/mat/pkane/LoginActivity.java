@@ -22,7 +22,6 @@ public class LoginActivity extends AppCompatActivity {
     Button btnMasuk;
     TextView username;
     TextView password;
-    TextView signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
 
         username = (TextView) findViewById(R.id.txtUsername);
         password = (TextView) findViewById(R.id.txtPassword);
-        signUp = findViewById(R.id.logSignUp);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("Users");

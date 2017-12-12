@@ -30,6 +30,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -94,9 +97,12 @@ public class Home extends AppCompatActivity
             @Override
             protected void populateViewHolder(final MenuViewHolder viewHolder, final Pijat model, final int position) {
 
+                Locale locale = new Locale("in", "ID");
+                NumberFormat fmt= NumberFormat.getCurrencyInstance(locale);
+
                 viewHolder.txtMenuName.setText(model.getName());
                 viewHolder.txtMenuDesc.setText(model.getDesc());
-                viewHolder.txtMenuPrice.setText(model.getPrice());
+                viewHolder.txtMenuPrice.setText(fmt.format(Integer.parseInt(model.getPrice())));
                 Picasso.with(getBaseContext()).load(model.getImage())
                         .into(viewHolder.imageView);
                 final Pijat clickItem = model;
@@ -137,7 +143,7 @@ public class Home extends AppCompatActivity
             }
         };
         recycler_menu.setAdapter(adapter);
-
+        adapter.notifyDataSetChanged();
     }
 
 
