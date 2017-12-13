@@ -89,7 +89,6 @@ public class CardAdapter extends RecyclerView.Adapter<CartViewHolder> {
         int price = (Integer.parseInt(listData.get(position).getPrice())-(Integer.parseInt(listData.get(position).getPrice())*Integer.parseInt(listData.get(position).getDiscount())));
         holder.txt_price.setText(fmt.format(price));
         holder.txt_cart_name.setText(listData.get(position).getProductName());
-
     }
 
     public Order getOrder(int index){

@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mat.pkane.Common.Common;
@@ -20,6 +21,8 @@ public class HomeAdmin extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView txtFullName;
+    ImageView imageLogo;
+
 
 
     @Override
@@ -38,11 +41,15 @@ public class HomeAdmin extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        imageLogo = findViewById(R.id.image_logo);
+
+        imageLogo.setImageResource(R.drawable.logo);
+
+
         View headerView = navigationView.getHeaderView(0);
         txtFullName = headerView.findViewById(R.id.txtFullName);
         txtFullName.setText(Common.currentUser.getNama());
-
-
     }
 
     @Override

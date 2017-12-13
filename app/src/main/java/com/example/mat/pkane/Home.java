@@ -58,14 +58,6 @@ public class Home extends AppCompatActivity
         database = FirebaseDatabase.getInstance();
         pijat = database.getReference("Pijat");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -88,7 +80,7 @@ public class Home extends AppCompatActivity
         recycler_menu.setLayoutManager(layoutManager);
 
         loadMenu();
-
+        adapter.notifyDataSetChanged();
     }
 
     private void loadMenu() {
@@ -143,8 +135,9 @@ public class Home extends AppCompatActivity
             }
         };
         recycler_menu.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
+
+
 
 
     @Override
@@ -178,7 +171,7 @@ public class Home extends AppCompatActivity
         if (id == R.id.nav_profil) {
             intent = new Intent(this, Profil.class);
             startActivity(intent);
-        }else if (id == R.id.nav_menu) {
+        }else if (id == R.id.nav_home) {
             adapter.notifyDataSetChanged();
         }else if (id == R.id.nav_chart) {
             intent = new Intent(Home.this,CartActivity.class);

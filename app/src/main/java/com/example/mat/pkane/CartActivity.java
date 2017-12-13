@@ -203,8 +203,8 @@ public class CartActivity extends AppCompatActivity {
             alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    cart.remove(item.getOrder());
                     new Database(CartActivity.this).removeCart(adapter.getOrder(item.getOrder()).getProductID());
+                    cart.remove(item.getOrder());
                     adapter.notifyDataSetChanged();
                     loadListFood();
                     Toast.makeText(CartActivity.this,"Cart Berhasil Dihapus ",Toast.LENGTH_SHORT).show();

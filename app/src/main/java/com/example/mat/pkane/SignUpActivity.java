@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.example.mat.pkane.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,6 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.math.BigInteger;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -94,11 +99,25 @@ public class SignUpActivity extends AppCompatActivity {
                                     Toast.makeText(SignUpActivity.this,"Password tidak cocok", Toast.LENGTH_SHORT).show();
                                     confirm.requestFocus();
                                 }else{
-                                    User user = new User(email.getText().toString(),name.getText().toString(),address.getText().toString(),gender.getSelectedItem().toString(),password.getText().toString(),phone.getText().toString(),admin);
+                                    String Password=password.getText().toString();
+                                    MessageDigest digest;
+                                    try
+                                    {
+                                        digest = MessageDigest.getInstance("MD5");
+                                        digest.update(Password.getBytes(Charset.forName("US-ASCII")),0,Password.length());
+                                        byte[] magnitude = digest.digest();
+                                        BigInteger bi = new BigInteger(1, magnitude);
+                                        String hash = String.format("%0" + (magnitude.length << 1) + "x", bi);
+                                        Password=hash;
+                                    }
+                                    catch (NoSuchAlgorithmException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
+                                    User user = new User(email.getText().toString(),name.getText().toString(),address.getText().toString(),gender.getSelectedItem().toString(), Password,phone.getText().toString(),admin);
                                     table_user.child(username.getText().toString()).setValue(user);
 
                                     Toast.makeText(SignUpActivity.this,"Pendaftaran Berhasil", Toast.LENGTH_SHORT).show();
-                                    finish();
                                 }
                             }
                         }

@@ -8,9 +8,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mat.pkane.Common.Common;
-import com.example.mat.pkane.Model.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.math.BigInteger;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class ChangePassword extends AppCompatActivity {
 
@@ -45,15 +49,44 @@ public class ChangePassword extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(oldPassword.getText().toString().equals(Common.currentUser.getPassword())){{
-                    Common.currentUser.setPassword(newPassword.getText().toString());
+                String password=oldPassword.getText().toString();
+                MessageDigest digest;
+                try
+                {
+                    digest = MessageDigest.getInstance("MD5");
+                    digest.update(password.getBytes(Charset.forName("US-ASCII")),0,password.length());
+                    byte[] magnitude = digest.digest();
+                    BigInteger bi = new BigInteger(1, magnitude);
+                    String hash = String.format("%0" + (magnitude.length << 1) + "x", bi);
+                    password=hash;
+                }
+                catch (NoSuchAlgorithmException e)
+                {
+                    e.printStackTrace();
+                }
+
+                if(password.equals(Common.currentUser.getPassword())){{
+                    password=newPassword.getText().toString();
+                    try
+                    {
+                        digest = MessageDigest.getInstance("MD5");
+                        digest.update(password.getBytes(Charset.forName("US-ASCII")),0,password.length());
+                        byte[] magnitude = digest.digest();
+                        BigInteger bi = new BigInteger(1, magnitude);
+                        String hash = String.format("%0" + (magnitude.length << 1) + "x", bi);
+                        password=hash;
+                    }
+                    catch (NoSuchAlgorithmException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    Common.currentUser.setPassword(password);
                     user.child(Common.username).setValue(Common.currentUser);
                     Toast.makeText(ChangePassword.this,"Berhasil Mengubah Password",Toast.LENGTH_SHORT);
                     onBackPressed();
                 }}else{
                     Toast.makeText(ChangePassword.this,"Password Salah!",Toast.LENGTH_SHORT);
                 }
-
             }
         });
     }
